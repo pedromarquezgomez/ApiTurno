@@ -5,7 +5,16 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 
 
 @Module({
-  imports: [TypeOrmModule.forRoot()],
+  imports:[ TypeOrmModule.forRoot({
+    type: 'mysql',
+    host: 'localhost',
+    port: 3306,
+    username: 'pedro',
+    password: 'pedro',
+    database: 'ApiTurno',
+    entities: [],
+    synchronize: true,
+  }), ],
   controllers: [AppController],
   providers: [AppService],
 })
