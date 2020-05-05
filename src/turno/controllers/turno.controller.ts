@@ -1,7 +1,6 @@
 import { Controller, Post, Body, Get, Put, Delete, Res, HttpStatus, Param } from '@nestjs/common';
 import { CreateTurnoDto } from '../dto/create-turno-dto';
 import { TurnoService } from 'src/services/turno/turno.service';
-import { response } from 'express';
 
 @Controller('turno')
 export class TurnoController {
@@ -12,7 +11,7 @@ export class TurnoController {
     @Post()
     create(@Body() createTurnoDto: CreateTurnoDto, @Res() response){
         this.turnoService.createTurno(createTurnoDto).then( turno => {
-            response.satatus(HttpStatus.CREATED).json(turno);
+            response.status(HttpStatus.OK).json(turno);
         }).catch ( ()=> {
             response.status(HttpStatus.FORBIDDEN).json({mensaje:'error al crear el turno'});
         });

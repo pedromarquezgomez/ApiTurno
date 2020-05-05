@@ -1,6 +1,6 @@
 export class CreateTurnoDto {
     readonly nombre: string;
-    readonly entrada: Date;
-    readonly salida: Date;
+    readonly entrada: string;
+    readonly salida: string;
 
 }

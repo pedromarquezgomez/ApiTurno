@@ -10,11 +10,11 @@ id: number;
 @Column('varchar')
 nombre: string;
 
-@Column('datetime')
-entrada: Date;
+@Column('varchar')
+entrada: string;
 
-@Column('datetime')
-salida: Date;
+@Column('varchar')
+salida: string;
 
 
 }
