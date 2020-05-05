@@ -2,6 +2,9 @@ import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { TurnoController } from './turno/controllers/turno.controller';
+import { Turno } from './turno/entities/turno.entity';
+import { TurnoService } from './services/turno/turno.service';
 
 
 @Module({
@@ -12,10 +15,10 @@ import { TypeOrmModule } from '@nestjs/typeorm';
     username: 'pedro',
     password: 'pedro',
     database: 'ApiTurno',
-    entities: [],
+    entities: [Turno],
     synchronize: true,
-  }), ],
-  controllers: [AppController],
-  providers: [AppService],
+  }),TypeOrmModule.forFeature([Turno]) ],
+  controllers: [AppController, TurnoController],
+  providers: [AppService, TurnoService, ],
 })
 export class AppModule {}
