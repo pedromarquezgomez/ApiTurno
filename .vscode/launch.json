@@ -1,13 +1,24 @@
 {
-    "version": "0.2.0",
-    "configurations": [
-      {
-        "type": "node",
-        "request": "launch",
-        "name": "Debug Nest Framework",
-        "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
-        "args": ["${workspaceFolder}/src/main.ts"],
-        "autoAttachChildProcesses": true
-      }
-    ]
-  }
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Debug Nest Framework",
+      "runtimeArgs": ["--nolazy", "-r", "ts-node/register"],
+      "args": ["${workspaceFolder}/src/main.ts"],
+      "autoAttachChildProcesses": true
+    }
+  ,
+  {
+    "type": "node",
+    "request": "launch",
+    "name": "Launch Program",
+    "program": "${workspaceFolder}/src/main.ts",
+    "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+    "skipFiles": [
+      "${workspaceFolder}/node_modules/**/*.js",
+      "<node_internals>/**/*.js"]
+    }
+  ]
+}

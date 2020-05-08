@@ -8,10 +8,8 @@ import { CreateTurnoDto } from 'src/turno/dto/create-turno-dto';
 export class TurnoService {
     constructor(
         @InjectRepository(Turno)
-        private readonly turnoRepository: Repository<Turno>,
-      ) {
-
-      }
+        private readonly turnoRepository: Repository<Turno>
+      ) {}
 
      async getAll(): Promise<Turno[]>{
          return await this.turnoRepository.find();

@@ -1,12 +1,10 @@
 import { Controller, Post, Body, Get, Put, Delete, Res, HttpStatus, Param } from '@nestjs/common';
 import { CreateTurnoDto } from '../dto/create-turno-dto';
-import { TurnoService } from 'src/services/turno/turno.service';
+import { TurnoService } from 'src/turno/service/turno.service';
 
 @Controller('turno')
 export class TurnoController {
-    constructor(private turnoService: TurnoService){
-
-    }
+    constructor(private turnoService: TurnoService){}
 
     @Post()
     create(@Body() createTurnoDto: CreateTurnoDto, @Res() response){

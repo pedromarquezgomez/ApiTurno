@@ -1,8 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 
-@Entity('Turno')
-export class Turno extends BaseEntity{
+@Entity('Operario')
+export class Operario extends BaseEntity{
     
 @PrimaryGeneratedColumn('increment')
 id: number;
@@ -10,11 +10,11 @@ id: number;
 @Column('varchar')
 nombre: string;
 
-@Column('time')
-entrada: Date;
+@Column('boolean')
+activo: boolean;
 
-@Column('time')
-salida: Date;
+@Column('varchar')
+role: string;
 
 
 }

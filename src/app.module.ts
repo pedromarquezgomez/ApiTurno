@@ -4,7 +4,10 @@ import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { TurnoController } from './turno/controllers/turno.controller';
 import { Turno } from './turno/entities/turno.entity';
-import { TurnoService } from './services/turno/turno.service';
+import { TurnoService } from './turno/service/turno.service';
+import { OperarioController } from './operario/controller/operario.controller';
+import { OperarioService } from './operario/service/operario.service';
+import { Operario } from './operario/entities/operario.entity';
 
 
 @Module({
@@ -15,10 +18,10 @@ import { TurnoService } from './services/turno/turno.service';
     username: 'pedro',
     password: 'pedro',
     database: 'ApiTurno',
-    entities: [Turno],
+    entities: [Turno, Operario],
     synchronize: true,
-  }),TypeOrmModule.forFeature([Turno]) ],
-  controllers: [AppController, TurnoController],
-  providers: [AppService, TurnoService, ],
+  }),TypeOrmModule.forFeature([Turno, Operario]) ],
+  controllers: [AppController, TurnoController, OperarioController],
+  providers: [AppService, TurnoService, OperarioService, ],
 })
 export class AppModule {}
