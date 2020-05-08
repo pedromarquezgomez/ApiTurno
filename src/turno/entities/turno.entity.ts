@@ -1,20 +1,20 @@
-import { Entity, PrimaryGeneratedColumn, Column } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
 
 
-@Entity()
-export class Turno {
+@Entity('Turno')
+export class Turno extends BaseEntity{
     
-@PrimaryGeneratedColumn()
+@PrimaryGeneratedColumn('increment')
 id: number;
 
-@Column('varchar')
+@Column('text')
 nombre: string;
 
-@Column('varchar')
-entrada: string;
+@Column('time')
+entrada: Date;
 
-@Column('varchar')
-salida: string;
+@Column('time')
+salida: Date;
 
 
 }
