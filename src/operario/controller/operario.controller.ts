@@ -1,28 +1,40 @@
-import { Controller, Post, Body, Res, HttpStatus, Get } from '@nestjs/common';
+import { Controller, Post, Body, Res, HttpStatus, Get, Put, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { OperarioService } from '../service/operario.service';
 import { CreateOperarioDto } from '../dto/create-operario-dto';
+import { Operario } from '../entities/operario.entity';
+
 
 @Controller('operario')
 export class OperarioController {
     constructor( private operarioService: OperarioService){}
     
     @Post()
-    create(@Body() createOperario: CreateOperarioDto, @Res() response){
-        this.operarioService.createOperario(createOperario).then( turno => {
-            response.status(HttpStatus.OK).json(turno);
-        }).catch ( ()=> {
-            response.status(HttpStatus.FORBIDDEN).json({mensaje:'error al crear el operario'});
-        });
-
+    async createOperario(@Body() createOperarioDto: CreateOperarioDto){
+        const Operario = await this.operarioService.createOperario(createOperarioDto);
+        return Operario;
     }
 
     @Get()
-    getAll(@Res()response){
-        this.operarioService.getAll().then(operarioList =>{
-            response.status(HttpStatus.OK).json(operarioList)
-        }).catch(() => {
-            response.status(HttpStatus.FORBIDDEN).json({mensaje: 'error en la obtencion de los operarios'});
-        });
+    async getOperarios(): Promise<Operario[]>{
+        const Operarios  = await this.operarioService.getAll();
+        return Operarios ;
     }
+
+    @Get(':id')
+    async get(@Param('id', ParseIntPipe) id: number): Promise<Operario>{
+        const Operario = await this.operarioService.get(id);
+        return Operario;
+    }
+
+    @Put(':id')
+    async updateOperario(@Body() actualizaOperarioDto: CreateOperarioDto, @Param('id') id: number){
+        const Operario: CreateOperarioDto = await this.operarioService.updateOperario(id, actualizaOperarioDto);
+        return Operario;
+    } 
+
+    @Delete(':id')
+    async delete(@Param('id', ParseIntPipe) id: number){
+        const Operario = await this.operarioService.deleteOperario(id);
+    } 
 
 }

@@ -1,45 +1,38 @@
-import { Controller, Post, Body, Get, Put, Delete, Res, HttpStatus, Param } from '@nestjs/common';
+import { Controller, Post, Body, Get, Put, Delete, Res, HttpStatus, Param, ParseIntPipe } from '@nestjs/common';
 import { CreateTurnoDto } from '../dto/create-turno-dto';
 import { TurnoService } from 'src/turno/service/turno.service';
+import { Turno } from '../entities/turno.entity';
 
 @Controller('turno')
 export class TurnoController {
     constructor(private turnoService: TurnoService){}
 
     @Post()
-    create(@Body() createTurnoDto: CreateTurnoDto, @Res() response){
-        this.turnoService.createTurno(createTurnoDto).then( turno => {
-            response.status(HttpStatus.OK).json(turno);
-        }).catch ( ()=> {
-            response.status(HttpStatus.FORBIDDEN).json({mensaje:'error al crear el turno'});
-        });
-
+    async createTurno(@Body() createTurnoDto: CreateTurnoDto){
+        const turno = await this.turnoService.createTurno(createTurnoDto);
+        return turno;
     }
 
     @Get()
-    getAll(@Res()response){
-        this.turnoService.getAll().then(turnoList =>{
-            response.status(HttpStatus.OK).json(turnoList)
-        }).catch(() => {
-            response.status(HttpStatus.FORBIDDEN).json({mensaje: 'error en la obtencion de los turnos'});
-        });
+    async getTurnos(): Promise<Turno[]>{
+        const turnos  = await this.turnoService.getAll();
+        return turnos ;
+    }
+
+    @Get(':id')
+    async get(@Param('id', ParseIntPipe) id: number): Promise<Turno>{
+        const turno = await this.turnoService.get(id);
+        return turno;
     }
 
     @Put(':id')
-    update(@Body() actualizaTurnoDto: CreateTurnoDto, @Res() response, @Param('id') idTurno){
-        this.turnoService.updateTurno(idTurno, actualizaTurnoDto).then(turno => {
-            response.status(HttpStatus.OK).json(turno);
-        }).catch( () => {
-            response.status(HttpStatus.FORBIDDEN).json({mensaje: 'error al actualizar el turno'});
-         });
-    }
+    async updateTurno(@Body() actualizaTurnoDto: CreateTurnoDto, @Param('id') id: number){
+        const turno: CreateTurnoDto = await this.turnoService.updateTurno(id, actualizaTurnoDto);
+        return turno;
+    } 
 
     @Delete(':id')
-    delete(@Res() response, @Param('id') idTurno){
-        this.turnoService.deleteTurno(idTurno).then(res =>{
-            response.status(HttpStatus.OK).json(res);
-        }).catch( () => {
-            response.status(HttpStatus.FORBIDDEN).json({mensaje: 'error al borrar el turno'});
-        });
-    }
+    async delete(@Param('id', ParseIntPipe) id: number){
+        const turno = await this.turnoService.deleteTurno(id);
+    } 
 }

@@ -11,11 +11,16 @@ export class TurnoService {
         private readonly turnoRepository: Repository<Turno>
       ) {}
 
-     async getAll(): Promise<Turno[]>{
+    async getAll(): Promise<Turno[]>{
          return await this.turnoRepository.find();
       }
 
-      async createTurno(turnoNuevo: CreateTurnoDto): Promise<Turno>{
+    async get(id: number): Promise<Turno>{
+        return await this.turnoRepository.findOne(id);
+        
+     }
+
+    async createTurno(turnoNuevo: CreateTurnoDto): Promise<Turno>{
           const nuevo = new Turno();
           nuevo.nombre = turnoNuevo.nombre;
           nuevo.entrada = turnoNuevo.entrada;
@@ -24,7 +29,7 @@ export class TurnoService {
           return await this.turnoRepository.save(nuevo);
       }
 
-      async updateTurno(id: number, turnoActualiza: CreateTurnoDto): Promise<Turno>{
+    async updateTurno(id: number, turnoActualiza: CreateTurnoDto): Promise<Turno>{
           const actualiza = await this.turnoRepository.findOne(id);
           actualiza.nombre = turnoActualiza.nombre;
           actualiza.entrada = turnoActualiza.entrada;
@@ -33,7 +38,7 @@ export class TurnoService {
           return await this.turnoRepository.save(actualiza);
       }
 
-      async deleteTurno(id: number): Promise<any>{
+    async deleteTurno(id: number): Promise<any>{
           return await this.turnoRepository.delete(id);
       }
 }
