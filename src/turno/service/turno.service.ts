@@ -12,6 +12,8 @@ export class TurnoService {
       ) {}
 
     async getAll(): Promise<Turno[]>{
+      console.log('service');
+
          return await this.turnoRepository.find();
       }
 

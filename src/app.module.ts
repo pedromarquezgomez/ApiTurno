@@ -8,6 +8,9 @@ import { TurnoService } from './turno/service/turno.service';
 import { OperarioController } from './operario/controller/operario.controller';
 import { OperarioService } from './operario/service/operario.service';
 import { Operario } from './operario/entities/operario.entity';
+import { Jornada } from './jornada/entities/jornada.entity';
+import { JornadaService } from './jornada/service/jornada/jornada.service';
+import { JornadaController } from './jornada/controller/jornada/jornada.controller';
 
 
 @Module({
@@ -18,10 +21,10 @@ import { Operario } from './operario/entities/operario.entity';
     username: 'pedro',
     password: 'pedro',
     database: 'ApiTurno',
-    entities: [Turno, Operario],
-    synchronize: true,
-  }),TypeOrmModule.forFeature([Turno, Operario]) ],
-  controllers: [AppController, TurnoController, OperarioController],
-  providers: [AppService, TurnoService, OperarioService, ],
+    entities: [Turno, Operario, Jornada],
+    synchronize: false,
+  }),TypeOrmModule.forFeature([Turno, Operario, Jornada]) ],
+  controllers: [AppController, TurnoController, OperarioController, JornadaController],
+  providers: [AppService, TurnoService, OperarioService, JornadaService ],
 })
 export class AppModule {}

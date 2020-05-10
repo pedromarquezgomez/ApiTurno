@@ -1,25 +1,28 @@
-import { Controller, Post, Body, Res, HttpStatus, Get, Put, Param, Delete, ParseIntPipe } from '@nestjs/common';
-import { OperarioService } from '../service/operario.service';
+import { Controller, Post, Body, Get, Put, Param, Delete, ParseIntPipe } from '@nestjs/common';
 import { CreateOperarioDto } from '../dto/create-operario-dto';
 import { Operario } from '../entities/operario.entity';
+import { OperarioService } from '../service/operario.service';
 
 
 @Controller('operario')
 export class OperarioController {
-    constructor( private operarioService: OperarioService){}
+    constructor( private operarioService: OperarioService){} 
     
-    @Post()
+      @Post()
     async createOperario(@Body() createOperarioDto: CreateOperarioDto){
         const Operario = await this.operarioService.createOperario(createOperarioDto);
         return Operario;
-    }
-
+    } 
     @Get()
+    async getTurnos(): Promise<Operario[]> {
+        const turnos  = await this.operarioService.getAll();
+        return turnos ; 
+    }
+     @Get()
     async getOperarios(): Promise<Operario[]>{
         const Operarios  = await this.operarioService.getAll();
         return Operarios ;
-    }
-
+    }     
     @Get(':id')
     async get(@Param('id', ParseIntPipe) id: number): Promise<Operario>{
         const Operario = await this.operarioService.get(id);
@@ -36,5 +39,5 @@ export class OperarioController {
     async delete(@Param('id', ParseIntPipe) id: number){
         const Operario = await this.operarioService.deleteOperario(id);
     } 
-
+ 
 }

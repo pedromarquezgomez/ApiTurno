@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Jornada } from "src/jornada/entities/jornada.entity";
 
 
 @Entity('Turno')
@@ -15,6 +16,9 @@ entrada: Date;
 
 @Column('time')
 salida: Date;
+
+@OneToMany(type => Jornada, jornada => jornada.turno)
+jornadas!: Jornada[];
 
 
 }

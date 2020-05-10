@@ -14,7 +14,7 @@ export class TurnoController {
     }
 
     @Get()
-    async getTurnos(): Promise<Turno[]>{
+    async getTurnos(): Promise<Turno[]> {
         const turnos  = await this.turnoService.getAll();
         return turnos ;
     }

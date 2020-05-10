@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, BaseEntity } from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, BaseEntity, OneToMany } from "typeorm";
+import { Jornada } from "src/jornada/entities/jornada.entity";
 
 
 @Entity('Operario')
@@ -15,6 +16,11 @@ activo: boolean;
 
 @Column('varchar')
 role: string;
+
+@OneToMany(type => Jornada, jornada => jornada.operario)
+jornadas!: Jornada[];
+
+
 
 
 }
