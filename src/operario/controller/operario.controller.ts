@@ -13,11 +13,7 @@ export class OperarioController {
         const Operario = await this.operarioService.createOperario(createOperarioDto);
         return Operario;
     } 
-    @Get()
-    async getTurnos(): Promise<Operario[]> {
-        const turnos  = await this.operarioService.getAll();
-        return turnos ; 
-    }
+  
      @Get()
     async getOperarios(): Promise<Operario[]>{
         const Operarios  = await this.operarioService.getAll();
