@@ -8,32 +8,32 @@ import { OperarioService } from '../service/operario.service';
 export class OperarioController {
     constructor( private operarioService: OperarioService){} 
     
-      @Post()
+      @Post('create')
     async createOperario(@Body() createOperarioDto: CreateOperarioDto){
-        const Operario = await this.operarioService.createOperario(createOperarioDto);
-        return Operario;
+        const operario = await this.operarioService.createOperario(createOperarioDto);
+        return operario;
     } 
   
-     @Get()
+     @Get('list')
     async getOperarios(): Promise<Operario[]>{
-        const Operarios  = await this.operarioService.getAll();
-        return Operarios ;
+        const operarios  = await this.operarioService.getAll();
+        return operarios ;
     }     
     @Get(':id')
     async get(@Param('id', ParseIntPipe) id: number): Promise<Operario>{
-        const Operario = await this.operarioService.get(id);
-        return Operario;
+        const operario = await this.operarioService.get(id);
+        return operario;
     }
 
-    @Put(':id')
+    @Put('update/:id')
     async updateOperario(@Body() actualizaOperarioDto: CreateOperarioDto, @Param('id') id: number){
-        const Operario: CreateOperarioDto = await this.operarioService.updateOperario(id, actualizaOperarioDto);
-        return Operario;
+        const operario: CreateOperarioDto = await this.operarioService.updateOperario(id, actualizaOperarioDto);
+        return operario;
     } 
 
     @Delete(':id')
     async delete(@Param('id', ParseIntPipe) id: number){
-        const Operario = await this.operarioService.deleteOperario(id);
+        const operario = await this.operarioService.deleteOperario(id);
     } 
- 
+
 }
