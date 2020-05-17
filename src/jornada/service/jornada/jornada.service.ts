@@ -3,6 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Jornada } from 'src/jornada/entities/jornada.entity';
 import { Repository } from 'typeorm';
 import { CreateJornadaDto } from 'src/jornada/dto/create-jornada-dto';
+import { Operario } from 'src/operario/entities/operario.entity';
 
 @Injectable()
 export class JornadaService {
@@ -11,13 +12,24 @@ export class JornadaService {
         private readonly JornadaRepository: Repository<Jornada>
       ) {}
 
-    async getAll(): Promise<Jornada[]>{
+    async getJornadas(): Promise<Jornada[]>{
          return await this.JornadaRepository.find();
       }
 
-    async get(id: number): Promise<Jornada>{
+    async getJornada(id: number): Promise<Jornada>{
         return await this.JornadaRepository.findOne(id);
         
+     }
+
+     async getJornadasByIdOperario(idOperario): Promise<Jornada []>{
+
+      return await this.JornadaRepository.find({operarioId : idOperario})
+
+     }
+     async getTurnosByIdOperarioAndDate(idOperario, fecha): Promise<Jornada>{
+
+      return await this.JornadaRepository.findOne({operarioId : idOperario, fecha: fecha})
+
      }
 
     async createJornada(JornadaNuevo: CreateJornadaDto): Promise<Jornada>{

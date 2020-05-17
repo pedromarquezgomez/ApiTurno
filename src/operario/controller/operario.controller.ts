@@ -2,6 +2,7 @@ import { Controller, Post, Body, Get, Put, Param, Delete, ParseIntPipe } from '@
 import { CreateOperarioDto } from '../dto/create-operario-dto';
 import { Operario } from '../entities/operario.entity';
 import { OperarioService } from '../service/operario.service';
+import { createQueryBuilder } from 'typeorm';
 
 
 @Controller('operario')
@@ -35,5 +36,5 @@ export class OperarioController {
     async delete(@Param('id', ParseIntPipe) id: number){
         const operario = await this.operarioService.deleteOperario(id);
     } 
-
+ 
 }

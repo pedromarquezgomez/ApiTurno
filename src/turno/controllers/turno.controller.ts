@@ -7,13 +7,13 @@ import { Turno } from '../entities/turno.entity';
 export class TurnoController {
     constructor(private turnoService: TurnoService){}
 
-    @Post()
+    @Post('create')
     async createTurno(@Body() createTurnoDto: CreateTurnoDto){
         const turno = await this.turnoService.createTurno(createTurnoDto);
         return turno;
     }
 
-    @Get()
+    @Get('list')
     async getTurnos(): Promise<Turno[]> {
         const turnos  = await this.turnoService.getAll();
         return turnos ;
@@ -25,7 +25,7 @@ export class TurnoController {
         return turno;
     }
 
-    @Put(':id')
+    @Put('update/:id')
     async updateTurno(@Body() actualizaTurnoDto: CreateTurnoDto, @Param('id') id: number){
         const turno: CreateTurnoDto = await this.turnoService.updateTurno(id, actualizaTurnoDto);
         return turno;

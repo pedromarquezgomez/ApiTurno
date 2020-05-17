@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { CreateOperarioDto } from '../dto/create-operario-dto';
 import { Operario } from '../entities/operario.entity';
 import { InjectRepository } from '@nestjs/typeorm';
-import { Repository } from 'typeorm';
+import { Repository, createQueryBuilder } from 'typeorm';
 
 
 @Injectable()
@@ -43,4 +43,12 @@ export class OperarioService {
     async deleteOperario(id: number): Promise<any>{
         return await this.operarioRepository.delete(id);
     }
+
+    async getId(nombre: string): Promise<number>{
+
+        const oper = await this.operarioRepository.findOne({ nombre : 'nombre'})
+        return oper.id;
+    }
+
+
 }

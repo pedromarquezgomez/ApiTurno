@@ -9,38 +9,36 @@ export class JornadaController {
      constructor(private jornadaService: JornadaService){}
 
     @Post()
-    async createjornada(@Body() createjornadaDto: CreateJornadaDto){
+    async createJornada(@Body() createjornadaDto: CreateJornadaDto){
         const jornada = await this.jornadaService.createJornada(createjornadaDto);
         return jornada;
     }
-    @Get()
-    async getTurnos():Promise<Jornada[]>{
-        const turnos  = await this.jornadaService.getAll();
-        return turnos ;
-    }
 
-     @Get()
-    async getjornadas():Promise<Jornada[]>{
-        console.log('controller JORNADA');
-        console.log('entra en get');
-        const jornadas  = await this.jornadaService.getAll();
+    @Get('list')
+    async getJornadas():Promise<Jornada[]>{
+        const jornadas  = await this.jornadaService.getJornadas();
         return jornadas ; 
     }
- 
     @Get(':id')
-    async get(@Param('id', ParseIntPipe) id: number): Promise<Jornada>{
-        const jornada = await this.jornadaService.get(id);
+    async getJornada(@Param('id', ParseIntPipe) id: number):Promise<Jornada>{
+        const jornada  = await this.jornadaService.getJornada(id);
+        return jornada ;
+    }
+
+    @Get('jornadaOperario/:idOperario')
+    async get(@Param('idOperario', ParseIntPipe) idOperario: number): Promise<Jornada []>{
+        const jornada: Jornada [] = await this.jornadaService.getJornadasByIdOperario(idOperario);
         return jornada;
     }
 
     @Put(':id')
-    async updatejornada(@Body() actualizajornadaDto: CreateJornadaDto, @Param('id') id: number){
+    async updateJornada(@Body() actualizajornadaDto: CreateJornadaDto, @Param('id') id: number){
         const jornada: CreateJornadaDto = await this.jornadaService.updateJornada(id, actualizajornadaDto);
         return jornada;
     } 
 
     @Delete(':id')
-    async delete(@Param('id', ParseIntPipe) id: number){
+    async deleteJornada(@Param('id', ParseIntPipe) id: number){
         const jornada = await this.jornadaService.deleteJornada(id);
     } 
 
