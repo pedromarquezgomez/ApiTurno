@@ -8,7 +8,7 @@ import { JornadaService } from 'src/jornada/service/jornada/jornada.service';
 export class JornadaController {
      constructor(private jornadaService: JornadaService){}
 
-    @Post()
+    @Post('createver')
     async createJornada(@Body() createjornadaDto: CreateJornadaDto){
         const jornada = await this.jornadaService.createJornada(createjornadaDto);
         return jornada;

@@ -18,10 +18,10 @@ import { QueryService } from './queries/service/query/query.service';
 @Module({
   imports:[ TypeOrmModule.forRoot({
     type: 'mysql',
-    host: 'localhost',
+    host: 'apiserve.mysql.database.azure.com',
     port: 3306,
-    username: 'pedro',
-    password: 'pedro',
+    username: 'pedro@apiserve',
+    password: 'Aa13042013',
     database: 'ApiTurno',
     entities: [Turno, Operario, Jornada],
     synchronize: false,
