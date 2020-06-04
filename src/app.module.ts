@@ -24,7 +24,7 @@ import { QueryService } from './queries/service/query/query.service';
     password: 'Aa13042013',
     database: 'ApiTurno',
     entities: [Turno, Operario, Jornada],
-    synchronize: true,
+    synchronize: false,
   }),TypeOrmModule.forFeature([Turno, Operario, Jornada]) ],
   controllers: [AppController, TurnoController, OperarioController, JornadaController, QueryController],
   providers: [AppService, TurnoService, OperarioService, JornadaService, QueryService ],
