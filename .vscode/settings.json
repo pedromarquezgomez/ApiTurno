@@ -2,5 +2,7 @@
     "appService.zipIgnorePattern": [
         "node_modules{,/**}",
         ".vscode{,/**}"
-    ]
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/00f902df-7484-4549-8f64-5238b3b17e61/resourceGroups/appsvc_linux_centralus/providers/Microsoft.Web/sites/apiTurnoV04",
+    "appService.deploySubpath": "."
 }
