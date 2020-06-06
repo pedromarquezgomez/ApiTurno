@@ -13,6 +13,8 @@ import { JornadaService } from './jornada/service/jornada/jornada.service';
 import { JornadaController } from './jornada/controller/jornada/jornada.controller';
 import { QueryController } from './queries/controllers/query/query.controller';
 import { QueryService } from './queries/service/query/query.service';
+import { AuthModule } from './auth/auth.module';
+import { UsersModule } from './users/users.module';
 
 
 @Module({
@@ -25,7 +27,7 @@ import { QueryService } from './queries/service/query/query.service';
     database: 'ApiTurno',
     entities: [Turno, Operario, Jornada],
     synchronize: false ,
-  }),TypeOrmModule.forFeature([Turno, Operario, Jornada]) ],
+  }),TypeOrmModule.forFeature([Turno, Operario, Jornada]), AuthModule, UsersModule ],
   controllers: [AppController, TurnoController, OperarioController, JornadaController, QueryController],
   providers: [AppService, TurnoService, OperarioService, JornadaService, QueryService ],
 })
